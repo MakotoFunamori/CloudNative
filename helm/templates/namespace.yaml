@@ -1,0 +1,9 @@
+## Set the API endpoint used to create the Deployment resource.
+apiVersion: v1
+## Define the type of the resource.
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: {{ .Values.namespace.name }}
+spec: {}
+status: {}
