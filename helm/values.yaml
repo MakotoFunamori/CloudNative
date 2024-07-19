@@ -4,7 +4,7 @@ namespace:
   apps: techtrends
 
 image:
-  repository: funamori/techtrends 
+  repository: MakotoFunamori/CloudNative 
   tag: latest
 
 replicaCount: 3
