@@ -8,7 +8,7 @@ service:
   type: ClusterIP
 
 image:
-  repository: funamori/techrends
+  repository: funamori/techtrends
   tag: latest
   pullPolicy: Always
 
