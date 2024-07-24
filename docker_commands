@@ -1,18 +1,25 @@
 ## Docker commands used to build the application 
-FROM python:3.8
-WORKDIR /app
-COPY ./techtreads .
+$ docker build -t techtrends .
 
 ## Docker commands used to run the application
+$ docker run -d -p 7111:3111 techtrends
+2284c25f9eeb2424ec18b2bdefafeefd19144e96f46019ff78a19490ab2e4546
+
+$ docker ps
+CONTAINER ID   IMAGE        COMMAND           CREATED          STATUS         PORTS                                                 NAMES
+2284c25f9eeb   techtrends   "python app.py"   11 seconds ago   Up 9 seconds   7111/tcp, 0.0.0.0:7111->3111/tcp, :::7111->3111/tcp   competent_hopper
+
 ## Docker commands used to get the application logs
+$ docker logs -f 2284c25f9eeb
+
 ## Logs from the container running the TechTrends application
-RUN apt-get clean \
-    && apt-get -y update
-
-RUN pip install -r requirements.txt
-RUN python init_db.py
-
-EXPOSE 7111
-
-CMD [ "python", "app.py" ]
-
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+WARNING:werkzeug:2024-07-22 11:32:54,864,  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug:2024-07-22 11:32:54,864,  * Running on http://172.18.0.2:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:2024-07-22 11:33:53,720, 172.18.0.1 - - [22/Jul/2024 11:33:53] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:2024-07-22 11:33:53,778, 172.18.0.1 - - [22/Jul/2024 11:33:53] "GET /static/css/main.css HTTP/1.1" 304 -
