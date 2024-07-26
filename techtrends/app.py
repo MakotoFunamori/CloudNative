@@ -46,15 +46,13 @@ def index():
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
-    day = date.today() 
-    time = datetime.now()
+
     if post is None:
-      app.logger.error(day.strftime("%d/%m/%Y")+", "+time.strftime("%H:%M:%S")+" From @app.route('/<int:post_id>'): Artice with id: "+str(post_id)+" cannot be retrieved!") 
+      app.logger.info('non-existing article not found')
       return render_template('404.html'), 404
+
     else:
-      day = date.today() 
-      time = datetime.now()
-      app.logger.info(day.strftime("%d/%m/%Y")+", "+time.strftime("%H:%M:%S")+" From @app.route('/<int:post_id>'): Artice "+post[2]+" retrieved!")
+      app.logger.info('Article: \"{}\" has been retrieved.'.format(post['title']))
       return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -62,7 +60,7 @@ def post(post_id):
 def about():
     time = datetime.now()
     day = date.today()    
-    app.logger.info(day.strftime("%d/%m/%Y")+", "+time.strftime("%H:%M:%S")+" From @app.route('/about'): About Us retrieved!")
+    app.logger.info(day.strftime("%d/%m/%Y")+", "+time.strftime("%H:%M:%S")+" About Us page has been retrieved.")
     return render_template('about.html')
 
 @app.route('/healthz')
@@ -100,9 +98,8 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-            time = datetime.now()
-            day = date.today()  
-            app.logger.info(day.strftime("%d/%m/%Y")+", "+time.strftime("%H:%M:%S")+" From @app.route('/create', methods=('GET', 'POST')): Article with title "+title+" recorded database")
+
+            app.logger.info('\"' + title + '\"' + ' has been created successfully.')
             return redirect(url_for('index'))
 
     return render_template('create.html')

@@ -4,7 +4,8 @@ LABEL maintainer="Makoto.Funamori"
 COPY ./techtrends /app
 WORKDIR /app
 RUN pip install -r requirements.txt
+RUN python init_db.py
 
-EXPOSE 3111
+EXPOSE 7111
 
 CMD [ "python", "app.py" ]
