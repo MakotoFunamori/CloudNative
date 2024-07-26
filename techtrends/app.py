@@ -104,19 +104,7 @@ def create():
 
     return render_template('create.html')
 
-def initialize_logger():
-    log_level = os.getenv("LOGLEVEL", "DEBUG").upper()
-    log_level = (
-        getattr(logging, log_level)
-        if log_level in ["CRITICAL", "DEBUG", "ERROR", "INFO", "WARNING",]
-        else logging.DEBUG
-    )
-
-    logging.basicConfig(
-        format='%(levelname)s:%(name)s:%(asctime)s, %(message)s',
-                level=log_level,
-    )
-
 if __name__ == "__main__":
-    initialize_logger()
+    format = "%(levelname)s:%(name)s:%(asctime)s - %(message)s"
+    logging.basicConfig(format=format, level=logging.DEBUG,)
     app.run(host='0.0.0.0', port='3111')
